@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS IT Academy - Kelajak IT Kasblari Markazi</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            darkest: '#080103',
+                            dark: '#120206',
+                            card: '#1c040a',
+                            border: '#3d0a16',
+                            red: '#ff1744',
+                            crimson: '#dc2626',
+                            accent: '#ff5252',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow-sm': '0 0 15px rgba(255, 23, 68, 0.3)',
+                        'glow-md': '0 0 25px rgba(255, 23, 68, 0.45)',
+                        'glow-lg': '0 0 40px rgba(255, 23, 68, 0.6)',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 23, 68, 0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(255, 23, 68, 0.6)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #080103;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Deep Crimson Glassmorphism */
+        .glass-panel {
+            background: rgba(28, 4, 10, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 23, 68, 0.18);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(255, 23, 68, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(255, 23, 68, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .crimson-gradient-bg {
+            background: radial-gradient(circle at 50% 0%, #2a040e 0%, #120206 55%, #080103 100%);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 12px rgba(255, 23, 68, 0.6);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #080103;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d0a16;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #ff1744;
+        }
+
+        /* Page View Switching animation */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page-view.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar relative min-h-screen">
+
+    <!-- Background Glowing Orbs -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-red-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-1/3 right-10 w-[30rem] h-[30rem] bg-brand-red/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+    <div class="fixed top-2/3 left-10 w-80 h-80 bg-rose-900/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-brand-border/40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" onclick="switchPage('home')" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-red to-red-800 flex items-center justify-center text-white text-xl font-black shadow-glow-sm group-hover:shadow-glow-md transition-all">
+                    <i class="fa-solid font-heading fa-code"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-extrabold text-2xl tracking-wider text-white flex items-center gap-1">
+                        NEXUS <span class="text-brand-red text-glow">IT</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest text-gray-400 uppercase font-semibold">Academy</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-brand-border/60">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-white bg-brand-red/20 border border-brand-red/40 transition-all">
+                    <i class="fa-solid fa-house mr-1.5 text-xs"></i> Bosh sahifa
+                </button>
+                <button onclick="switchPage('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-gray-300 hover:text-white hover:bg-brand-red/10 transition-all">
+                    <i class="fa-solid fa-circle-info mr-1.5 text-xs"></i> Biz haqimizda
+                </button>
+                <button onclick="switchPage('courses')" id="nav-courses" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-gray-300 hover:text-white hover:bg-brand-red/10 transition-all">
+                    <i class="fa-solid fa-laptop-code mr-1.5 text-xs"></i> Kurslar
+                </button>
+                <button onclick="switchPage('projects')" id="nav-projects" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-gray-300 hover:text-white hover:bg-brand-red/10 transition-all">
+                    <i class="fa-solid fa-cubes mr-1.5 text-xs"></i> Loyihalar
+                </button>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="tel:+998901234567" class="text-xs text-gray-300 hover:text-brand-red flex items-center gap-2 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-brand-border/50 flex items-center justify-center text-brand-red">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase">Aloqa uchun</p>
+                        <p class="font-bold">+998 (90) 123-45-67</p>
+                    </div>
+                </a>
+                <button onclick="openRegisterModal()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-red to-red-700 hover:from-red-500 hover:to-brand-red text-white text-sm font-bold shadow-glow-sm hover:shadow-glow-md transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Topshirish
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-brand-border px-6 py-5 flex flex-col gap-3">
+            <button onclick="switchPage('home'); toggleMobileMenu()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-left font-semibold text-white bg-brand-red/20">
+                <i class="fa-solid fa-house text-brand-red"></i> Bosh sahifa
+            </button>
+            <button onclick="switchPage('about'); toggleMobileMenu()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-left font-semibold text-gray-300 hover:bg-brand-border/30">
+                <i class="fa-solid fa-circle-info text-brand-red"></i> Biz haqimizda
+            </button>
+            <button onclick="switchPage('courses'); toggleMobileMenu()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-left font-semibold text-gray-300 hover:bg-brand-border/30">
+                <i class="fa-solid fa-laptop-code text-brand-red"></i> Kurslar
+            </button>
+            <button onclick="switchPage('projects'); toggleMobileMenu()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-left font-semibold text-gray-300 hover:bg-brand-border/30">
+                <i class="fa-solid fa-cubes text-brand-red"></i> Real Loyihalar
+            </button>
+            <div class="pt-3 border-t border-brand-border/50 flex flex-col gap-3">
+                <button onclick="openRegisterModal(); toggleMobileMenu()" class="w-full py-3 rounded-xl bg-brand-red text-white font-bold text-center shadow-glow-sm">
+                    Ro'yxatdan o'tish
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="relative z-10 min-h-[calc(100vh-80px-300px)]">
+
+        <!-- ========================================== -->
+        <!-- 1. BOSH SAHIFA / HOME PAGE VIEW            -->
+        <!-- ========================================== -->
+        <section id="page-home" class="page-view active">
+            
+            <!-- HERO SECTION -->
+            <div class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden crimson-gradient-bg">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        
+                        <!-- Left Hero Column -->
+                        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-red/30">
+                                <span class="w-2.5 h-2.5 rounded-full bg-brand-red animate-ping"></span>
+                                <span class="text-xs font-bold text-red-200 tracking-wide uppercase">2026-Yil Qabuli Ochiq!</span>
+                            </div>
+
+                            <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white leading-tight tracking-tight">
+                                Zamonaviy IT Kasblarini <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-rose-400 to-red-500 text-glow">
+                                    NEXUS bilan noldan
+                                </span> Egallang!
+                            </h1>
+
+                            <p class="text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                                Dasturlash, Sun'iy Intellekt va Kiberxavfsizlik sohasida xalqaro darajadagi Junior/Middle mutaxassis bo'ling. 90% amaliyot, real loyihalar va kafolatlangan portfolio!
+                            </p>
+
+                            <!-- CTA Button Trio -->
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                                <button onclick="openRegisterModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-red to-red-700 hover:from-red-500 hover:to-brand-red text-white font-bold text-base shadow-glow-md hover:shadow-glow-lg transition-all flex items-center justify-center gap-3">
+                                    <span>Kursga Ro'yxatdan O'tish</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="switchPage('courses')" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-brand-border hover:border-brand-red/60 text-white font-semibold text-base transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-circle-play text-brand-red"></i>
+                                    <span>Kurslar Bilan Tanishish</span>
+                                </button>
+                            </div>
+
+                            <!-- Trust Badges -->
+                            <div class="pt-6 border-t border-brand-border/40 flex flex-wrap justify-center lg:justify-start items-center gap-6 text-xs text-gray-400">
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-brand-red"></i> Amaliy reallik
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-brand-red"></i> Sertifikat va Portfolio
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-brand-red"></i> HR Ko'magi
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Right Hero Interactive Visual Card -->
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative mx-auto max-w-md lg:max-w-none">
+                                <!-- Outer Glowing Frame -->
+                                <div class="absolute -inset-1 bg-gradient-to-r from-brand-red to-rose-900 rounded-3xl blur-xl opacity-60 animate-pulse-glow"></div>
+                                
+                                <div class="relative glass-panel rounded-3xl p-6 sm:p-8 border border-brand-red/30 space-y-6">
+                                    
+                                    <!-- Header Tag -->
+                                    <div class="flex items-center justify-between pb-4 border-b border-brand-border/50">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                        </div>
+                                        <span class="text-xs font-mono text-gray-400">nexus_academy_code.py</span>
+                                    </div>
+
+                                    <!-- Simulated Code Window -->
+                                    <div class="font-mono text-xs sm:text-sm space-y-2 leading-relaxed text-gray-200">
+                                        <p><span class="text-pink-500">class</span> <span class="text-yellow-400">Student</span>:</p>
+                                        <p class="pl-4"><span class="text-pink-500">def</span> <span class="text-blue-400">__init__</span>(self, name):</p>
+                                        <p class="pl-8">self.name = name</p>
+                                        <p class="pl-8">self.status = <span class="text-green-400">"Learning IT"</span></p>
+                                        <p class="pl-8">self.skills = [<span class="text-green-400">"Frontend"</span>, <span class="text-green-400">"Backend"</span>, <span class="text-green-400">"AI"</span>]</p>
+                                        <p class="pl-4 mt-2"><span class="text-pink-500">def</span> <span class="text-blue-400">transform</span>(self):</p>
+                                        <p class="pl-8 text-brand-red font-bold">return "Middle Software Developer 🚀"</p>
+                                    </div>
+
+                                    <!-- Floating Info Pill -->
+                                    <div class="glass-panel p-4 rounded-xl border border-brand-red/40 flex items-center gap-4 bg-brand-dark/80">
+                                        <div class="w-12 h-12 rounded-lg bg-brand-red/20 flex items-center justify-center text-brand-red text-2xl font-bold">
+                                            <i class="fa-solid fa-trophy"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-white">94% Ishga Joylashish</h4>
+                                            <p class="text-xs text-gray-400">O'quvchilarimiz yetakchi kompaniyalarda ishlamoqda</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS STRIP -->
+            <div class="relative py-12 border-y border-brand-border/50 bg-brand-dark/90">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="space-y-1">
+                            <h3 class="text-3xl sm:text-4xl font-heading font-extrabold text-white text-glow counter" data-target="1500">0</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 font-medium">+ Bitiruvchilar</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="text-3xl sm:text-4xl font-heading font-extrabold text-white text-glow counter" data-target="94">0</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 font-medium">% Ish Bilan Ta'minlangan</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="text-3xl sm:text-4xl font-heading font-extrabold text-white text-glow counter" data-target="25">0</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 font-medium">+ Senior Mentorlar</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="text-3xl sm:text-4xl font-heading font-extrabold text-white text-glow counter" data-target="60">0</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 font-medium">+ Real Loyihalar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POPULAR COURSES HIGHLIGHT -->
+            <div class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-4 mb-16">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">Ommabop Yo'nalishlar</span>
+                    <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white">Eng Talabgir IT Kurslarimiz</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">NEXUS IT Academy dasturlari mehnat bozori talablariga moslashtirilgan bo'lib, eng so'nggi texnologiyalarga asoslangan.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Course 1 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-rose-900 flex items-center justify-center text-2xl text-white shadow-glow-sm">
+                                <i class="fa-brands fa-react"></i>
+                            </div>
+                            <span class="text-xs font-bold text-brand-red uppercase tracking-wider">6 Oylik Dastur</span>
+                            <h3 class="text-2xl font-bold text-white">Full-Stack Web Development</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">HTML, CSS, JavaScript, React.js, Node.js, Python, Django hamda PostgreSQL texnologiyalarini noldan o'rganasiz.</p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold"><i class="fa-regular fa-clock text-brand-red mr-1"></i> 6 oy (Haftada 3 kun)</span>
+                            <button onclick="openCourseModal('Full-Stack Web Development')" class="text-sm font-bold text-brand-red hover:text-white transition-colors flex items-center gap-1">
+                                Batafsil <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-rose-900 flex items-center justify-center text-2xl text-white shadow-glow-sm">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <span class="text-xs font-bold text-brand-red uppercase tracking-wider">5 Oylik Dastur</span>
+                            <h3 class="text-2xl font-bold text-white">Python & Data Science / AI</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">Python, Machine Learning, Data Analytics va AI modellarini yaratish, ChatGPT API lari bilan ishlashni o'rganing.</p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold"><i class="fa-regular fa-clock text-brand-red mr-1"></i> 5 oy (Haftada 3 kun)</span>
+                            <button onclick="openCourseModal('Python & Data Science / AI')" class="text-sm font-bold text-brand-red hover:text-white transition-colors flex items-center gap-1">
+                                Batafsil <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-rose-900 flex items-center justify-center text-2xl text-white shadow-glow-sm">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <span class="text-xs font-bold text-brand-red uppercase tracking-wider">7 Oylik Dastur</span>
+                            <h3 class="text-2xl font-bold text-white">Cyber Security & Pentesting</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">Tizim xavfsizligi, Kali Linux, etik xakkerlik va kiber-hujumlardan himoyalanish texnikalarini chuqur o'zlashtiring.</p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <span class="text-xs text-gray-300 font-semibold"><i class="fa-regular fa-clock text-brand-red mr-1"></i> 7 oy (Haftada 3 kun)</span>
+                            <button onclick="openCourseModal('Cyber Security & Pentesting')" class="text-sm font-bold text-brand-red hover:text-white transition-colors flex items-center gap-1">
+                                Batafsil <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <button onclick="switchPage('courses')" class="px-8 py-3 rounded-xl border border-brand-red/50 text-white font-bold hover:bg-brand-red/20 transition-all">
+                        Barcha Kurslarni Ko'rish <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- WHY CHOOSE US -->
+            <div class="py-20 border-t border-brand-border/40 bg-brand-dark/40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center space-y-4 mb-16">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">Nega Ayni NEXUS?</span>
+                        <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white">Afzalliklarimiz va Kafolatimiz</h2>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">Senior Mentorlar</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">Xalqaro va mahalliy yirik IT kompaniyalarda kamida 5 yillik tajribaga ega dasturchilar dars beradi.</p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">Kafolatlangan Portfolio</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">O'qish davomida kamida 4-5 ta real loyihalarni tayyorlab, tayyor mutaxassis sertifikatiga ega bo'lasiz.</p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-building-user"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">HR Ko'magi va Amaliyot</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">Rezyume tayyorlash, mock-interview va sherik kompaniyalarga ishga tavsiya etish imkoniyati.</p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl space-y-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">24/7 Co-Working & Support</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">Akademiyamizda istalgan vaqtda kelib ishlash uchun bepul tezkor internet va qulay zonalar mavjud.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA RIBBON -->
+            <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative glass-panel rounded-3xl p-8 sm:p-12 border border-brand-red/40 overflow-hidden text-center space-y-6">
+                    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-red/20 rounded-full blur-2xl"></div>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">Kelajak IT Sohasida! Hozirdan Boshlang.</h2>
+                    <p class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base">Dastlabki bepul sinov darsimizga yoziling va o'zingiz mos keladigan yo'nalishni mentorlarimiz ko'magida tanlang.</p>
+                    <button onclick="openRegisterModal()" class="px-10 py-4 rounded-xl bg-gradient-to-r from-brand-red to-red-700 hover:from-red-500 hover:to-brand-red text-white font-bold text-base shadow-glow-md transition-all">
+                        Bepul Konsultatsiya Olish
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 2. BIZ HAQIMIZDA / ABOUT PAGE VIEW         -->
+        <!-- ========================================== -->
+        <section id="page-about" class="page-view">
+            
+            <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <!-- Page Title Header -->
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">NEXUS Akademiyasi</span>
+                    <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white">Biz Haqimizda</h1>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-base">Biz shunchaki o'quv markazi emasmiz — biz zamonaviy texnologiyalar ekotizimi va kelajak muhandislarini tayyorlovchi maskanmiz.</p>
+                </div>
+
+                <!-- Mission & Vision Cards -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-brand-red/30">
+                        <div class="w-12 h-12 rounded-xl bg-brand-red/20 flex items-center justify-center text-brand-red text-2xl font-bold">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Bizning Missiyamiz</h3>
+                        <p class="text-gray-300 leading-relaxed text-sm">
+                            Yoshlarga va sohani o'zgartirmoqchi bo'lgan har bir insonga xalqaro darajadagi zamonaviy IT bilimlarni berish, ularni amaliy loyihalar orqali kuchli mutaxassis qilib shakllantirish va global mehnat bozoriga olib chiqish.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl space-y-4 border border-brand-red/30">
+                        <div class="w-12 h-12 rounded-xl bg-brand-red/20 flex items-center justify-center text-brand-red text-2xl font-bold">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Bizning Qarashimiz</h3>
+                        <p class="text-gray-300 leading-relaxed text-sm">
+                            O'zbekistonda eng innovatsion va natijador IT akademiyalardan biriga aylanish, har bir bitiruvchimizning dunyoning yetakchi IT kompaniyalarida masofadan va bevosita ishlashiga imkoniyat yaratish.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Senior Mentors Grid -->
+                <div class="space-y-10">
+                    <div class="text-center space-y-3">
+                        <h2 class="text-3xl font-heading font-bold text-white">Tajribali Mentorlarimiz</h2>
+                        <p class="text-gray-400 text-sm">Sizga dars beradigan va loyihalaringizni nazorat qiladigan senior mutaxassislar.</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Mentor 1 -->
+                        <div class="glass-panel p-6 rounded-2xl text-center space-y-4 glass-panel-hover">
+                            <div class="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-brand-red p-1">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Mentor" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Javohir Alimov</h4>
+                                <p class="text-xs text-brand-red font-semibold">Lead Frontend Dev (Ex-EPAM)</p>
+                            </div>
+                            <p class="text-xs text-gray-400">6+ yil tajriba. React, Next.js va TypeScript bo'yicha ekspert.</p>
+                            <div class="flex justify-center gap-3 text-gray-400 text-sm">
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Mentor 2 -->
+                        <div class="glass-panel p-6 rounded-2xl text-center space-y-4 glass-panel-hover">
+                            <div class="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-brand-red p-1">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Mentor" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Sardor Rahimov</h4>
+                                <p class="text-xs text-brand-red font-semibold">Senior Backend Specialist</p>
+                            </div>
+                            <p class="text-xs text-gray-400">8+ yil tajriba. Python, Django, Microservices, GoLang.</p>
+                            <div class="flex justify-center gap-3 text-gray-400 text-sm">
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Mentor 3 -->
+                        <div class="glass-panel p-6 rounded-2xl text-center space-y-4 glass-panel-hover">
+                            <div class="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-brand-red p-1">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Mentor" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Malika Umarova</h4>
+                                <p class="text-xs text-brand-red font-semibold">Flutter & Mobile Lead</p>
+                            </div>
+                            <p class="text-xs text-gray-400">5+ yil tajriba. Cross-platform mobil ilovalar va UI/UX arxitekturasi.</p>
+                            <div class="flex justify-center gap-3 text-gray-400 text-sm">
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Mentor 4 -->
+                        <div class="glass-panel p-6 rounded-2xl text-center space-y-4 glass-panel-hover">
+                            <div class="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-brand-red p-1">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Mentor" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Timur Karimov</h4>
+                                <p class="text-xs text-brand-red font-semibold">Cybersecurity Specialist</p>
+                            </div>
+                            <p class="text-xs text-gray-400">7+ yil tajriba. CEH sertifikatli etik xakker va tarmoq xavfsizligi.</p>
+                            <div class="flex justify-center gap-3 text-gray-400 text-sm">
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="hover:text-brand-red"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 3. KURSLAR / COURSES PAGE VIEW             -->
+        <!-- ========================================== -->
+        <section id="page-courses" class="page-view">
+            
+            <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- Courses Page Header -->
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">O'quv Dasturlari</span>
+                    <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white">Barcha IT Kurslarimiz</h1>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-base">O'zingizga qiziq bo'lgan yo'nalishni tanlang va professional IT martabangizni boshlang.</p>
+                </div>
+
+                <!-- Course Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="filterCourses('all')" class="course-filter-btn px-5 py-2 rounded-xl text-sm font-bold bg-brand-red text-white shadow-glow-sm">Barchasi</button>
+                    <button onclick="filterCourses('web')" class="course-filter-btn px-5 py-2 rounded-xl text-sm font-bold glass-panel text-gray-300 hover:text-white">Web Development</button>
+                    <button onclick="filterCourses('ai')" class="course-filter-btn px-5 py-2 rounded-xl text-sm font-bold glass-panel text-gray-300 hover:text-white">AI & Python</button>
+                    <button onclick="filterCourses('mobile')" class="course-filter-btn px-5 py-2 rounded-xl text-sm font-bold glass-panel text-gray-300 hover:text-white">Mobile Dev</button>
+                    <button onclick="filterCourses('security')" class="course-filter-btn px-5 py-2 rounded-xl text-sm font-bold glass-panel text-gray-300 hover:text-white">Kiberxavfsizlik</button>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Course Card 1 -->
+                    <div class="course-card web glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-brands fa-html5"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-green-500/20 text-green-400 border border-green-500/30">Noldan Boshlash</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Frontend Web Engineering</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">HTML5, CSS3, Tailwind CSS, JavaScript ES6+, React.js, Next.js va Redux Toolkit orqali zamonaviy web ilovalar yaratish.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">HTML/CSS</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">JavaScript</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">React.js</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">5 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('Frontend Web Engineering')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 2 -->
+                    <div class="course-card web glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-brands fa-python"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30">Talabgir</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Python Backend Development</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">Python, Django, Django REST Framework, PostgreSQL, Redis, Docker va Microservices arxitekturasida ishlashni o'rganing.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Python</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Django</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">PostgreSQL</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">6 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('Python Backend Development')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 3 -->
+                    <div class="course-card ai glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-400 border border-purple-500/30">VIP Yo'nalish</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Artificial Intelligence & ML</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">AI modellar, TensorFlow, PyTorch, OpenAI API, Data Science hamda Computer Vision bo'yicha eng so'nggi amaliy metodlar.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Machine Learning</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">PyTorch</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Data Analytics</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">6 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('Artificial Intelligence & ML')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 4 -->
+                    <div class="course-card mobile glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30">Cross-Platform</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Flutter Mobile Apps</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">Dart tili va Flutter freymvorkida ham Android, ham iOS uchun zamonaviy va tezkor ilovalar yaratishni o'rganing.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Flutter</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Dart</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Firebase</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">5 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('Flutter Mobile Apps')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 5 -->
+                    <div class="course-card security glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-solid fa-user-shield"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-red-500/20 text-red-400 border border-red-500/30">Kiber Himoya</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Ethical Hacking & Security</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">Tarmoqlar xavfsizligi, zaifliklarni aniqlash, Kali Linux, Metasploit hamda axborot tizimlarini himoya qilish.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Linux</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Network Security</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Pentesting</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">7 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('Ethical Hacking & Security')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 6 -->
+                    <div class="course-card web glass-panel glass-panel-hover rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-teal-500/20 text-teal-400 border border-teal-500/30">UI/UX Design</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">UI/UX & Product Design</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">Figma, Adobe XD, Prototyping, Wireframing va foydalanuvchi tajribasiga asoslangan dizayn tizimlarini yaratish.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Figma</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">Wireframe</span>
+                                <span class="px-2 py-1 rounded bg-brand-border/40 text-[10px] text-gray-300">User Testing</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-brand-border/40 flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Davomiyligi</p>
+                                <p class="text-xs font-bold text-white">4 Oylik Dastur</p>
+                            </div>
+                            <button onclick="openRegisterModal('UI/UX & Product Design')" class="px-4 py-2 rounded-xl bg-brand-red hover:bg-red-600 text-white text-xs font-bold shadow-glow-sm">
+                                Yozilish
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 4. LOYIHALAR / PROJECTS PAGE VIEW          -->
+        <!-- ========================================== -->
+        <section id="page-projects" class="page-view">
+            
+            <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- Section Title -->
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">O'quvchilar Portfoliosi</span>
+                    <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white">Real Student Loyihalari</h1>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-base">NEXUS akademiyasi o'quvchilari tomonidan ta'lim jarayonida yaratilgan va muvaffaqiyatli ishga tushirilgan loyihalar.</p>
+                </div>
+
+                <!-- Projects Showcase Grid -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Project 1 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-brand-red/20 group">
+                        <div class="relative h-48 overflow-hidden bg-brand-border/40">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-glow-sm">Fintech App</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-xl font-bold text-white">PaySpeed Mobile Wallet</h3>
+                            <p class="text-xs text-gray-400">Flutter va Python Django REST orqali yaratilgan tezkor to'lov hamda pul o'tkazmalari ilovasi.</p>
+                            <div class="pt-3 border-t border-brand-border/40 flex justify-between items-center text-xs text-gray-300">
+                                <span>Muallif: <strong>Farrux Zokirov</strong></span>
+                                <span class="text-brand-red font-bold">Full-Stack Batch #12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-brand-red/20 group">
+                        <div class="relative h-48 overflow-hidden bg-brand-border/40">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-glow-sm">AI SaaS</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-xl font-bold text-white">NexusAI Content Generator</h3>
+                            <p class="text-xs text-gray-400">OpenAI API va React Next.js yordamida avtomatik matn hamda kod yaratuvchi web platforma.</p>
+                            <div class="pt-3 border-t border-brand-border/40 flex justify-between items-center text-xs text-gray-300">
+                                <span>Muallif: <strong>Aziza Salimova</strong></span>
+                                <span class="text-brand-red font-bold">AI Course #4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-brand-red/20 group">
+                        <div class="relative h-48 overflow-hidden bg-brand-border/40">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-glow-sm">Security Dashboard</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-xl font-bold text-white">CyberShield Threat Monitor</h3>
+                            <p class="text-xs text-gray-400">Server va tarmoqlardagi zaifliklarni real vaqt rejimida monitoring qiluvchi kiber-xavfsizlik paneli.</p>
+                            <div class="pt-3 border-t border-brand-border/40 flex justify-between items-center text-xs text-gray-300">
+                                <span>Muallif: <strong>Rustam Toshpulatov</strong></span>
+                                <span class="text-brand-red font-bold">CyberSec #2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- GLOBAL FAQ ACCORDION SECTION -->
+        <section class="py-20 border-t border-brand-border/40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-3 py-1.5 rounded-full border border-brand-red/30">Ko'p Beriladigan Savollar</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white">Tez-Tez Beriladigan Savollar (FAQ)</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- FAQ 1 -->
+                    <div class="glass-panel rounded-2xl border border-brand-border/40 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center focus:outline-none">
+                            <span>Darslarda qatnashish uchun IT sohasida boshlang'ich bilim kerakmi?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-red transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-brand-border/30 pt-4">
+                            Yo'q, bizning aksariyat dasturlarimiz mutlaqo noldan o'rgatishga mo'ljallangan. Mentorlarimiz eng sodda tushunchalardan boshlab, bosqichma-bosqich murakkab mavzulargacha amaliyot bilan tushuntirib berishadi.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="glass-panel rounded-2xl border border-brand-border/40 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center focus:outline-none">
+                            <span>Darslar onlayn bo'ladimi yoki oflayn?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-red transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-brand-border/30 pt-4">
+                            Darslarimiz zamonaviy jihozlangan o'quv xonalarimizda oflayn formatda o'tiladi. Shuningdek, har bir dars yozib olinadi va o'quvchining shaxsiy kabinetiga yuklab boriladi.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="glass-panel rounded-2xl border border-brand-border/40 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center focus:outline-none">
+                            <span>Kursni bitirgach ishga joylashishda yordam beriladimi?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-red transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-brand-border/30 pt-4">
+                            Ha! Bizning maxsus HR-markazimiz rezyume tayyorlash, GitHub va LinkedIn profillarini to'g'rilash hamda hamkor kompaniyalarimizda suhbatlardan o'tishga ko'maklashadi.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="glass-panel rounded-2xl border border-brand-border/40 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center focus:outline-none">
+                            <span>To'lovni bo'lib to'lash imkoniyati bormi?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-red transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-brand-border/30 pt-4">
+                            Ha, o'quv kursi to'lovini har oy bo'lib-bo me'yorda to'lashingiz mumkin. Bir yo'la to'liq to'lov qilganlar uchun esa maxsus chegirmalar mavjud.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="glass-panel border-t border-brand-border/50 bg-brand-darkest pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-red to-red-800 flex items-center justify-center text-white text-lg font-black shadow-glow-sm">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-2xl text-white">NEXUS <span class="text-brand-red">IT</span></span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Zamonaviy IT ta'lim markazi. Kelajak kasblarini professional va amaliy uslubda biz bilan egallang.
+                    </p>
+                    <div class="flex gap-3 text-gray-400">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-border/40 flex items-center justify-center hover:text-brand-red hover:bg-brand-red/20 transition-all"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-border/40 flex items-center justify-center hover:text-brand-red hover:bg-brand-red/20 transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-border/40 flex items-center justify-center hover:text-brand-red hover:bg-brand-red/20 transition-all"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-border/40 flex items-center justify-center hover:text-brand-red hover:bg-brand-red/20 transition-all"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Sahifalar</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" onclick="switchPage('home')" class="hover:text-brand-red transition-colors">Bosh sahifa</a></li>
+                        <li><a href="#" onclick="switchPage('about')" class="hover:text-brand-red transition-colors">Biz haqimizda</a></li>
+                        <li><a href="#" onclick="switchPage('courses')" class="hover:text-brand-red transition-colors">Barcha Kurslar</a></li>
+                        <li><a href="#" onclick="switchPage('projects')" class="hover:text-brand-red transition-colors">O'quvchilar Loyihalari</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Popular Courses -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Yo'nalishlar</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" onclick="switchPage('courses')" class="hover:text-brand-red transition-colors">Frontend Development</a></li>
+                        <li><a href="#" onclick="switchPage('courses')" class="hover:text-brand-red transition-colors">Python Backend</a></li>
+                        <li><a href="#" onclick="switchPage('courses')" class="hover:text-brand-red transition-colors">Sun'iy Intellekt va ML</a></li>
+                        <li><a href="#" onclick="switchPage('courses')" class="hover:text-brand-red transition-colors">Kiberxavfsizlik</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact Info -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Biz Bilan Aloqa</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-red"></i> Toshkent sh., Chilonzor t., 19-mavze</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-red"></i> +998 (90) 123-45-67</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-brand-red"></i> info@nexus-academy.uz</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-brand-border/40 text-center text-xs text-gray-500">
+                © 2026 NEXUS IT Academy. Barcha huquqlar himoyalangan.
+            </div>
+        </div>
+    </footer>
+
+    <!-- REGISTER APPLICATION MODAL -->
+    <div id="registerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="relative glass-panel rounded-3xl max-w-md w-full p-8 border border-brand-red/50 shadow-glow-lg space-y-6 transform scale-95 transition-transform duration-300" id="modalCard">
+            
+            <!-- Close Button -->
+            <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="space-y-2 text-center">
+                <div class="w-12 h-12 rounded-full bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white">Kursga Yozilish</h3>
+                <p class="text-xs text-gray-400">Ma'lumotlaringizni qoldiring, menejerlarimiz 15 daqiqada bog'lanishadi.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="applyForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Ism va Familiyangiz</label>
+                    <input type="text" required placeholder="Masalan: Ali Valiyev" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-brand-border/60 text-white text-sm focus:outline-none focus:border-brand-red transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Telefon Raqamingiz</label>
+                    <input type="tel" required placeholder="+998 (90) 000-00-00" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-brand-border/60 text-white text-sm focus:outline-none focus:border-brand-red transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tanlangan Yo'nalish</label>
+                    <select id="modalCourseSelect" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-brand-border/60 text-white text-sm focus:outline-none focus:border-brand-red transition-colors">
+                        <option value="Full-Stack Web Development">Full-Stack Web Development</option>
+                        <option value="Frontend Web Engineering">Frontend Web Engineering</option>
+                        <option value="Python Backend Development">Python Backend Development</option>
+                        <option value="Artificial Intelligence & ML">Artificial Intelligence & ML</option>
+                        <option value="Flutter Mobile Apps">Flutter Mobile Apps</option>
+                        <option value="Ethical Hacking & Security">Ethical Hacking & Security</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-red-700 hover:from-red-500 hover:to-brand-red text-white font-bold text-sm shadow-glow-sm transition-all">
+                    Arizani Yuborish
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel px-6 py-4 rounded-2xl border border-green-500/50 shadow-glow-sm flex items-center gap-3 hidden transform translate-y-10 transition-all duration-300">
+        <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <h5 class="text-sm font-bold text-white">Arizangiz Qabul Qilindi!</h5>
+            <p class="text-xs text-gray-300">Tez orada siz bilan bog'lanamiz.</p>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        
+        // Single Page View Switcher Function
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => {
+                p.classList.remove('active');
+            });
+
+            // Show target page
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update navbar state
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-brand-red/20', 'border', 'border-brand-red/40', 'text-white');
+                btn.classList.add('text-gray-300');
+            });
+
+            const activeBtn = document.getElementById('nav-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-red/20', 'border', 'border-brand-red/40', 'text-white');
+                activeBtn.classList.remove('text-gray-300');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Course Category Filter
+        function filterCourses(category) {
+            const cards = document.querySelectorAll('.course-card');
+            const buttons = document.querySelectorAll('.course-filter-btn');
+
+            // Update button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white', 'shadow-glow-sm');
+                btn.classList.add('glass-panel', 'text-gray-300');
+            });
+            event.target.classList.remove('glass-panel', 'text-gray-300');
+            event.target.classList.add('bg-brand-red', 'text-white', 'shadow-glow-sm');
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // FAQ Accordion Toggle
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Register Modal Controls
+        function openRegisterModal(courseName = '') {
+            const modal = document.getElementById('registerModal');
+            const select = document.getElementById('modalCourseSelect');
+            
+            if (courseName && select) {
+                select.value = courseName;
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('modalCard').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeRegisterModal() {
+            const modal = document.getElementById('registerModal');
+            document.getElementById('modalCard').classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function openCourseModal(courseTitle) {
+            switchPage('courses');
+            setTimeout(() => openRegisterModal(courseTitle), 300);
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeRegisterModal();
+            
+            // Show Toast
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-10');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 4000);
+
+            e.target.reset();
+        }
+
+        // Counter Animation Logic
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 50;
+                
+                const update = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(update, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                update();
+            });
+        }
+
+        // Window Load Initialization
+        window.onload = function() {
+            animateCounters();
+        };
+    </script>
+</body>
+</html>
